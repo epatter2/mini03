@@ -1,4 +1,5 @@
 require 'sinatra'
+require './lib/semester.rb'
 
 set :public_folder, "public"
 
@@ -7,7 +8,8 @@ get '/' do
 end
 
 post '/semesters/' do
-  erb :semesters, :locals => { :current => params['current'], :num => params['num'] }
+  erb :semesters, :locals => { :current => params['current'], :num => params['num'],
+  :array => Semester.new.next_semester(params['current'], params['num']) }
 end
 
 get '/about/' do
